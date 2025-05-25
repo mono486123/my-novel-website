@@ -3,14 +3,11 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>SOMA宅神OoG小說網</title>
-  <meta name="description" content="《贈予不公平的世界一點安穩》是一部奇幻吐槽小說，跟隨嘴賤勇者鈴木真斗在尤尼斯提亞大陸的爆笑冒險！從卡維托拉的史萊姆果凍危機到魔王軍的焦土荒原，靠嘴炮與運氣逆轉，揭開夢境與現實的崩壞真相！">
+  <title>贈予不公平的世界一點安穩 - mura宅神的小說網站</title>   <meta name="description" content="《贈予不公平的世界一點安穩》是一部奇幻吐槽小說，跟隨嘴賤勇者鈴木真斗在尤尼斯提亞大陸的爆笑冒險！從卡維托拉的史萊姆果凍危機到魔王軍的焦土荒原，靠嘴炮與運氣逆轉，揭開夢境與現實的崩壞真相！">
   <meta name="keywords" content="夢境邊界, 奇幻小說, 吐槽冒險, 鈴木真斗, 卡維托拉, 女神黎絲, 魔王軍, 冒險者公會, 搞笑勇者, 史萊姆果凍">
-  <meta name="author" content="SOMA宅神OoG">
-  <meta property="og:title" content="贈予不公平的世界一點安穩 - 嘴賤勇者的奇幻冒險">
+  <meta name="author" content="mura宅神">   <meta property="og:title" content="贈予不公平的世界一點安穩 - 嘴賤勇者的奇幻冒險">
   <meta property="og:description" content="在尤尼斯提亞大陸，鈴木真斗聯手詐騙女神黎絲、中二劍士莎莉莎、法師姐妹尤米莉亞與米莉緹，展開搞笑冒險！嘴炮、運氣！">
-<meta property="og:image" content="https://mono486123.github.io/my-novel-website/imges/moto.png">
-  <meta property="og:url" content="https://mono486123.github.io/my-novel-website/">
+  <meta property="og:image" content="https://mono486123.github.io/my-novel-website/imges/moto.png">   <meta property="og:url" content="https://mono486123.github.io/my-novel-website/">
   <meta property="og:type" content="website">
   <style>
     body {
@@ -57,7 +54,7 @@
     <div>
       <button class="chapter-button" onclick="showChapter(1)">第一章：設定錯誤的勇者</button>
       <button class="chapter-button" onclick="showChapter(2)">第二章：東拼西湊的團隊</button>
-    </div>
+            </div>
 
     <div id="content">
       <p>點擊上方章節按鈕閱讀內容。</p>
@@ -65,13 +62,36 @@
   </div>
 
   <script>
-    const chapters = {
-      1: "聽著這句話，轉過頭看著說這句話的人...不對...是神，女神！",
-      2: "第一道陽光像烈焰一樣，狠狠射在我臉上，把我從公園躺椅裡拽醒。揉了揉酸痛的脖子，感覺像鬼壓了一夜，身上還沾著幾片樹葉。拖著沉重的步伐在鎮上找早餐。"
+    // 定義章節檔案的路徑，這裡不再直接存儲內容
+    const chapterPaths = {
+      1: 'chapters/chapter1.txt',
+      2: 'chapters/chapter2.txt',
+      // 添加更多章節的路徑
+      // 3: 'chapters/chapter3.txt'
     };
 
-    function showChapter(num) {
-      document.getElementById('content').innerHTML = '<p>' + chapters[num] + '</p>';
+    async function showChapter(num) {
+      const contentDiv = document.getElementById('content');
+      const chapterPath = chapterPaths[num];
+
+      if (!chapterPath) {
+        contentDiv.innerHTML = '<p>抱歉，找不到該章節。</p>';
+        return;
+      }
+
+      contentDiv.innerHTML = '<p>載入中...</p>'; // 顯示載入提示
+
+      try {
+        const response = await fetch(chapterPath); // 發送請求讀取檔案
+        if (!response.ok) {
+          throw new Error(`HTTP 錯誤! 狀態碼: ${response.status}`);
+        }
+        const chapterText = await response.text(); // 取得檔案的純文字內容
+        contentDiv.innerHTML = '<p>' + chapterText.replace(/\n/g, '<br>') + '</p>'; // 將換行符號替換為HTML的<br>
+      } catch (error) {
+        console.error('載入章節失敗:', error);
+        contentDiv.innerHTML = '<p>載入章節內容時發生錯誤。請稍後再試。</p>';
+      }
     }
   </script>
 </body>
