@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>我的小說介紹</title>
+  <style>
+    body {
+      font-family: "Microsoft JhengHei", sans-serif;
+      background: #fdf6e3;
+      color: #333;
+      padding: 2rem;
+    }
+    h1 {
+      text-align: center;
+    }
+    #intro {
+      max-width: 700px;
+      margin: auto;
+      background: #fff8dc;
+      padding: 1.5rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+    .chapter-button {
+      display: inline-block;
+      margin: 0.5rem;
+      padding: 0.5rem 1rem;
+      background: #ffcc70;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+    .chapter-button:hover {
+      background: #ffaa00;
+      color: white;
+    }
+    #content {
+      margin-top: 1rem;
+      line-height: 1.8;
+    }
+  </style>
+</head>
+<body>
+  <h1>我的小說：《夢境邊界》</h1>
+  <div id="intro">
+    <p>這是一部關於夢境與現實交錯的奇幻小說，講述主角在夢中發現另一個世界，並一步步解開世界崩壞的真相。</p>
+
+    <div>
+      <button class="chapter-button" onclick="showChapter(1)">第一章：入夢</button>
+      <button class="chapter-button" onclick="showChapter(2)">第二章：邊界</button>
+    </div>
+
+    <div id="content">
+      <p>點擊上方章節按鈕閱讀內容。</p>
+    </div>
+  </div>
+
+  <script>
+    const chapters = {
+      1: "主角阿嵐在一次意外中進入了夢境世界，他發現這個世界竟與現實緊密相連，甚至能影響現實。",
+      2: "在夢境與現實的邊界上，阿嵐遇見了神秘的少女羽雪，並開始探查這個世界崩塌的原因。"
+    };
+
+    function showChapter(num) {
+      document.getElementById('content').innerHTML = '<p>' + chapters[num] + '</p>';
+    }
+  </script>
+</body>
+</html>
